@@ -42,7 +42,7 @@ export default function App() {
   useEffect(() => {
     if (NO_KEY) { setLoading(false); return; }
 
-    const safe = (fn) => fn.catch(() => []);
+    const safe = (p) => Promise.resolve(p).catch(() => []);
 
     Promise.all([
       safe(getTrendingMovies()),
@@ -60,14 +60,14 @@ export default function App() {
       topMovies,   topTV,   action,   scifi,
       crimeTV,     animated,
     ]) => {
-      const all = [...trendMovies, ...trendTV];
+      const all = [...(trendMovies||[]), ...(trendTV||[])];
       setHero(all.find(i => i.backdrop) || all[0] || null);
       setRows({
-        trendMovies, trendTV,
-        popMovies,   popTV,
-        topMovies,   topTV,
-        action,      scifi,
-        crimeTV,     animated,
+        trendMovies: trendMovies||[], trendTV: trendTV||[],
+        popMovies:   popMovies||[],   popTV:   popTV||[],
+        topMovies:   topMovies||[],   topTV:   topTV||[],
+        action:      action||[],      scifi:   scifi||[],
+        crimeTV:     crimeTV||[],     animated:animated||[],
       });
     }).catch(() => setApiError(true))
       .finally(() => setLoading(false));

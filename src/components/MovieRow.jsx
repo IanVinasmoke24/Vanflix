@@ -19,7 +19,7 @@ function MovieCard({ movie, onSelect }) {
           <span>•</span>
           <span>{movie.year}</span>
           <span>•</span>
-          <span>{movie.genre[0]}</span>
+          <span>{movie.media_type === 'tv' ? '📺 Serie' : '🎬 Película'}</span>
         </div>
         <div className="card-actions">
           <button className="card-btn play" aria-label={`Reproducir ${movie.title}`}>▶</button>

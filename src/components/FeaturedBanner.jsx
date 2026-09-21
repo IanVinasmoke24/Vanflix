@@ -11,7 +11,9 @@ export default function FeaturedBanner({ movie, onSelect }) {
       <div className="featured-banner-overlay">
         <div className="featured-banner-label">🎬 Vanflix Original</div>
         <div className="featured-banner-title">{movie.title}</div>
-        <p className="featured-banner-desc">{movie.description.slice(0, 90)}...</p>
+        <p className="featured-banner-desc">
+          {(movie.overview || '').slice(0, 90)}{movie.overview?.length > 90 ? '...' : ''}
+        </p>
       </div>
     </div>
   );
